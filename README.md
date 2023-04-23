@@ -5,14 +5,12 @@
 This is a weather app created using Vite + React, Google Image Search API, and OpenWeatherMap API. </br>
 It displays the current time of the user's location, time of the inputed location, weather of the location, what the weather actually feels like, humidity, and wind speed. </br>
 
-<ins>Installation</ins> </br>
-Clone the repository </br>
-Run npm install or yarn to install the dependencies </br>
-Rename the .env.example file to .env and update the API keys with your own keys for Google Image Search API and OpenWeatherMap API. <br>
-
-<ins>Usage</ins> </br>
-Run npm run dev or yarn dev to start the development server </br>
-Access the app in your localhost server </br>
+<ins>Technologies</ins> </br>
+Vite </br>
+React </br>
+Axios </br>
+Google Image Search API </br>
+OpenWeatherMap API </br>
 
 <ins>Features</ins> </br>
 User's current location is detected and displayed </br>
@@ -21,9 +19,26 @@ Google Image Search API is used to display a relevant background image based on 
 Displays the current time of the user's location </br>
 Displays the actual feels-like temperature, humidity, and wind speed </br>
 
-<ins>Technologies</ins> </br>
-Vite </br>
-React </br>
-Axios </br>
-Google Image Search API </br>
-OpenWeatherMap API </br>
+<ins>Run Locally</ins> </br>
+Clone the project
+```bash
+  git clone https://github.com/SyntaxWarrior30/Weather-App
+```
+Go to the project directory
+```bash
+  cd Weather-App
+```
+Install dependencies
+```bash
+  npm install
+```
+Rename .env.exmaple to .env and input your Google Search Engine ID & Google API key. </br>
+```
+VITE_CX={Your Google Search Engine ID}
+VITE_API_KEY={Your Google API key}
+```
+Run the development server
+```bash
+  npm run dev
+```
+
