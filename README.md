@@ -32,7 +32,7 @@ Install dependencies
 ```bash
   npm install
 ```
-Rename .env.exmaple to .env and input your Google Search Engine ID & Google API key. </br>
+Rename `.env.exmaple` to `.env` and input your Google Search Engine ID & Google API key. </br>
 ```
 VITE_CX={Your Google Search Engine ID}
 VITE_API_KEY={Your Google API key}
