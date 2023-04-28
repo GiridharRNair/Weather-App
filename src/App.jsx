@@ -39,6 +39,11 @@ function App() {
         var ele = document.getElementsByClassName("app")[0]
         ele.style.backgroundImage = `linear-gradient( rgba(0,0,0,.5), rgba(0,0,0,.5) ), url(${data.items[0].link})`;
       })
+      .catch(error => {
+        console.log(error);
+        var ele = document.getElementsByClassName("app")[0]
+        ele.style.backgroundImage = `linear-gradient( rgba(0,0,0,.5), rgba(0,0,0,.5) ), url(public/DefaultImage.jpeg)`;
+      })
   }
 
   return (
