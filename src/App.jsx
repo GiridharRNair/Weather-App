@@ -42,7 +42,7 @@ function App() {
       .catch(error => {
         console.log(error);
         var ele = document.getElementsByClassName("app")[0]
-        ele.style.backgroundImage = `linear-gradient( rgba(0,0,0,.5), rgba(0,0,0,.5) ), url(https://i.ytimg.com/vi/M1hdsv6T_9g/maxresdefault.jpg)`;
+        ele.style.backgroundImage = `linear-gradient( rgba(0,0,0,.5), rgba(0,0,0,.5) ), url(/public/DefaultImage.jpeg)`;
       })
   }
 
