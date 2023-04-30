@@ -36,6 +36,7 @@ Rename `.env.exmaple` to `.env` and input your Google Search Engine ID & Google 
 ```
 VITE_CX={Your Google Search Engine ID}
 VITE_API_KEY={Your Google API key}
+VITE_WEATHER_KEY={Your OpenWeather API Key}
 ```
 Run the development server
 ```bash

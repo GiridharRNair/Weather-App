@@ -9,7 +9,8 @@ function App() {
 
   const cx = import.meta.env.VITE_CX
   const googleAPIKey = import.meta.env.VITE_API_KEY;
-  const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=4916c6ec25f9c96b9095d8616f26b592`
+  const openWeatherKey = import.meta.env.VITE_WEATHER_KEY;
+  const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=${openWeatherKey}`
 
   function searchLocation (event) {
     if (event.key === 'Enter') {
