@@ -42,6 +42,7 @@ jobs:
         env:
           VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
           VITE_CX: ${{ secrets.VITE_CX }}
+          VITE_WEATHER_KEY: ${{ secrets.VITE_WEATHER_KEY }}
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
