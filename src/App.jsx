@@ -41,7 +41,6 @@ function App() {
     }
   }
   
-
   function getSunriseSunsetTime () {
     fetch(weatherUrl)
     .then((response) => response.json())
@@ -76,7 +75,7 @@ function App() {
   
   return (
     <div className='overflow-auto scrollbar-hide app flex flex-col py-5 h-screen items-center'>
-      <div className="relative flex w-[90vw] h-[3vw] flex-wrap items-stretch">
+      <div className="relative flex w-[90vw] h-3 flex-wrap items-stretch">
         <input
           title="Searchbar"
           type="text"
@@ -86,7 +85,7 @@ function App() {
           onChange={event => setLocation(event.target.value)}
           onKeyDown={searchLocation} />
       </div>
-      <div className='flex pt-5 flex-col items-center'>
+      <div className='flex pt-16 flex-col items-center'>
       {data.name ? 
         <>
           <LocationClock lat={data.coord.lat} lon={data.coord.lon} /> 
@@ -127,6 +126,9 @@ function App() {
           </button>
         </a>
       </div>  
+      <footer className='pt-16'>
+        Created by Giridhar Nair
+      </footer>
     </div>
   )
 }

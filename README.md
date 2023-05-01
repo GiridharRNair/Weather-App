@@ -1,17 +1,10 @@
 # Weather-App
 
-<img width='600' src="./public/UserInterface.png"/>
+<img width='460' src="./public/UserInterface.png"/>
 <img width='200' src="./public/MobileUserInterface.gif"/>
 
 ## Introduction
-This is a simple weather application created using Vite + React, Tailwind CSS, Google Image Search API, and OpenWeatherMap API. </br>
-
-## Technologies </br>
-Vite </br>
-React </br>
-Tailwind CSS </br>
-Google Image Search API </br>
-OpenWeatherMap API </br>
+This is a simple responsive weather application created using Vite + React, Tailwind CSS, Google Image Search API, and OpenWeatherMap API. </br>
 
 ## Run Locally
 Clone the project
