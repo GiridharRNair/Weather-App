@@ -1,46 +1,43 @@
-import { useState } from 'react'
-import Clock from './assets/LocalClock.jsx'
-import LocationClock from './assets/LocationClock.jsx'
-import BottomTile from './assets/BottomTile.jsx'
+import { useState } from 'react';
+import LocalClock from './assets/LocalClock.jsx';
+import LocationClock from './assets/LocationClock.jsx';
+import BottomTile from './assets/BottomTile.jsx';
 
 function App() {
 
-  const [location, setLocation] = useState('')
-  const [data, setData] = useState('')
+  const [location, setLocation] = useState('');
+  const [data, setData] = useState('');
   const [placeHolder, setPlaceHolder] = useState('Enter City Name')
   const [sunrise, setSunrise] = useState("");
   const [sunset, setSunset] = useState("");
 
-  const cx = import.meta.env.VITE_CX
+  const cx = import.meta.env.VITE_CX;
   const googleAPIKey = import.meta.env.VITE_API_KEY;
   const openWeatherKey = import.meta.env.VITE_WEATHER_KEY;
-  const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=${openWeatherKey}`
-  const backgroundUrl = `https://www.googleapis.com/customsearch/v1?key=${googleAPIKey}&cx=${cx}&q=${location}+skyline+1080p&searchType=image`
+  const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=${openWeatherKey}`;
+  const backgroundUrl = `https://www.googleapis.com/customsearch/v1?key=${googleAPIKey}&cx=${cx}&q=${location}+skyline+1080p&searchType=image`;
 
   function searchLocation (event) {
     if (event.key === 'Enter') {
-      fetch(weatherUrl)
-      .then(response => {
-        if (response.ok) {
-          response.json().then((data) => {
-            if (data.name != undefined) {
-              changeBackground();
-              setPlaceHolder('Enter City Name')
-              setData(data);
-              getSunriseSunsetTime();
-            }
-          });
-        } else {
-          throw new Error('Error: 404 (Not Found)');
-        }
-      })
-      .catch(error => {
-        if (error.message === '404 (Not Found)') {
-          setPlaceHolder('Location Not Found')
-        } 
-        console.log(error)
-      })
-      setLocation('')
+      try {
+        fetch(weatherUrl)
+          .then(response => {
+            response.json().then((data) => {
+              if (data.name != undefined) {
+                changeBackground();
+                setPlaceHolder('Enter City Name');
+                setData(data);
+                getSunriseSunsetTime();
+              } else {
+                setPlaceHolder('Invalid Location');
+              }
+            });
+          })
+        setLocation('');
+      }
+      catch (error) {
+        console.log(error);
+      }
     }
   }
   
@@ -90,31 +87,30 @@ function App() {
           onKeyDown={searchLocation} />
       </div>
       <div className='flex pt-5 flex-col items-center'>
-        {!data.name && <Clock/>}
-        {data.name && 
-          <>
-            <LocationClock lat={data.coord.lat} lon={data.coord.lon} /> 
-            <div className="text-7xl font-bold">
-              <h1>{data.name}</h1>
-            </div>
-            <div className="py-5 text-7xl font-bold">
-              <h1>{data.main.temp.toFixed()}°F</h1>
-            </div>
-            <div className="text-3xl">
-              <p>{data.weather[0].main}</p>
-            </div>
-            <div className="flex flex-col pt-6 gap-4 sm:flex-row">
-              <BottomTile title={"Feels Like"} info={data.main.feels_like.toFixed() + "°F"}/>
-              <BottomTile title={"Humidity"} info={data.main.humidity + "%"}/>
-              <BottomTile title={"Wind Speed"} info={data.wind.speed.toFixed() + " MPH"}/>
-            </div>
-            <div className="flex flex-col pt-5 gap-4 sm:flex-row">
-              <BottomTile title={"Air Pressure"} info={data.main.pressure.toFixed() + " hPa"}/>
-              <BottomTile title={"Sunrise"} info={sunrise}/>
-              <BottomTile title={"Sunset"} info={sunset}/>
-            </div>
-          </>
-        }
+      {data.name ? 
+        <>
+          <LocationClock lat={data.coord.lat} lon={data.coord.lon} /> 
+          <div className="text-7xl font-bold">
+            <h1>{data.name}</h1>
+          </div>
+          <div className="py-5 text-7xl font-bold">
+            <h1>{data.main.temp.toFixed()}°F</h1>
+          </div>
+          <div className="text-3xl">
+            <p>{data.weather[0].main}</p>
+          </div>
+          <div className="flex flex-col pt-6 gap-4 sm:flex-row">
+            <BottomTile title={"Feels Like"} info={data.main.feels_like.toFixed() + "°F"}/>
+            <BottomTile title={"Humidity"} info={data.main.humidity + "%"}/>
+            <BottomTile title={"Wind Speed"} info={data.wind.speed.toFixed() + " MPH"}/>
+          </div>
+          <div className="flex flex-col pt-5 gap-4 sm:flex-row">
+            <BottomTile title={"Air Pressure"} info={data.main.pressure.toFixed() + " hPa"}/>
+            <BottomTile title={"Sunrise"} info={sunrise}/>
+            <BottomTile title={"Sunset"} info={sunset}/>
+          </div>
+        </>
+      : <LocalClock/>}
       </div>
       <div title="Go to site's Github" className='fixed bottom-1 right-2'>
         <a href="https://github.com/SyntaxWarrior30/Weather-App" target="_blank" rel="noopener noreferrer">

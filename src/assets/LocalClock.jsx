@@ -11,7 +11,7 @@ function Clock() {
   }, []);
 
   return (
-    <div className="text-white text-3xl py-3">
+    <div className="text-white text-3xl py-5">
       {clockState}
     </div>
   );

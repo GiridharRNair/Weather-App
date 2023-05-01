@@ -1,17 +1,19 @@
 # Weather-App
 
-<img src="./public/UserInterface.png"/>
+<img width='600' src="./public/UserInterface.png"/>
+<img width='200' src="./public/MobileUserInterface.gif"/>
 
-This is a weather app created using Vite + React, Tailwind CSS, Google Image Search API, and OpenWeatherMap API. </br>
+## Introduction
+This is a simple weather application created using Vite + React, Tailwind CSS, Google Image Search API, and OpenWeatherMap API. </br>
 
-<ins>Technologies</ins> </br>
+## Technologies </br>
 Vite </br>
 React </br>
 Tailwind CSS </br>
 Google Image Search API </br>
 OpenWeatherMap API </br>
 
-<ins>Run Locally</ins> </br>
+## Run Locally
 Clone the project
 ```bash
   git clone https://github.com/SyntaxWarrior30/Weather-App
