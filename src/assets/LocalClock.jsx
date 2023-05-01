@@ -10,7 +10,11 @@ function Clock() {
     }, 1000);
   }, []);
 
-  return <div style={{ fontSize: "50px", margin: "60px" }}>{clockState}</div>;
+  return (
+    <div className="text-white text-3xl py-5">
+      {clockState}
+    </div>
+  );
 }
 
 export default Clock;
