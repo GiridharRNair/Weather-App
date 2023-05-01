@@ -1,7 +1,7 @@
 # Weather-App
 
-<img src="./public/UserInterface.png"/>
-<img src="./public/MobileUserInterface.gif"/>
+<img width='800' src="./public/UserInterface.png"/>
+<img height='500' src="./public/MobileUserInterface.gif"/>
 
 ## Introduction
 This is a simple responsive weather application created using Vite + React, Tailwind CSS, Google Image Search API, and OpenWeatherMap API. </br>
