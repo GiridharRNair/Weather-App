@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Clock from './assets/LocalClock.jsx'
 import LocationClock from './assets/LocationClock.jsx'
 import BottomTile from './assets/BottomTile.jsx'
@@ -24,7 +24,6 @@ function App() {
         if (response.ok) {
           response.json().then((data) => {
             if (data.name != undefined) {
-              console.log(data);
               changeBackground();
               setPlaceHolder('Enter City Name')
               setData(data);
@@ -32,7 +31,7 @@ function App() {
             }
           });
         } else {
-          throw new Error('404 (Not Found)');
+          throw new Error('Error: 404 (Not Found)');
         }
       })
       .catch(error => {
@@ -79,11 +78,12 @@ function App() {
   }
   
   return (
-    <div className='no-scrollbar app flex flex-col py-5 h-screen items-center'>
+    <div className='overflow-auto scrollbar-hide app flex flex-col py-5 h-screen items-center'>
       <div className="relative flex w-[90vw] h-[3vw] flex-wrap items-stretch">
         <input
+          title="Searchbar"
           type="text"
-          className="bg-slate-600 relative rounded-lg m-0 text-white -mr-0.5 block w-[1px] min-w-0 flex-auto text-center border border-solid border-neutral-300 bg-opacity-70 bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-white focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none "
+          className="bg-slate-600 relative rounded-lg m-0 text-white -mr-0.5 block w-[1px] min-w-0 flex-auto text-center border border-solid border-neutral-300 bg-opacity-70 bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-white focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none"
           value={location}
           placeholder={placeHolder}
           onChange={event => setLocation(event.target.value)}
@@ -131,9 +131,6 @@ function App() {
           </button>
         </a>
       </div>  
-      <footer className='pt-4'>
-        Created by Giridhar Nair
-      </footer>
     </div>
   )
 }

@@ -14,8 +14,17 @@ body {
   min-height: 100%;
   margin: 0;
   padding: 0;
-  background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url("./HomepageImage.jpeg") center center/cover no-repeat fixed;
+  background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url("/HomepageImage.jpeg") center center/cover no-repeat fixed;
   color: #fff;
 }
 
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* For IE, Edge and Firefox */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
 
