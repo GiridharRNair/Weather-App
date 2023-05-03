@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import LandingPage from './assets/LandingPage.jsx';
+import HomePage from './assets/HomePage.jsx';
 import LocationClock from './assets/LocationClock.jsx';
 import BottomTile from './assets/BottomTile.jsx';
 import WeatherData from './assets/WeatherData.js'
+import moment from 'moment';
 
 function App() {
 
@@ -49,7 +50,7 @@ function App() {
   }
   
   return (
-    <div className='overflow-auto scrollbar-hide app flex flex-col py-5 h-screen items-center'>
+    <div className='overflow-auto scrollbar-hide app flex flex-col py-3 h-screen items-center'>
       <div className="relative flex w-[90vw] h-3 flex-wrap items-stretch">
         <input
           title="Searchbar"
@@ -80,11 +81,11 @@ function App() {
           </div>
           <div className="flex flex-col pt-5 gap-4 sm:flex-row">
             <BottomTile title={"Air Pressure"} info={data.main.pressure.toFixed() + " hPa"}/>
-            <BottomTile title={"Sunrise"} info={new Date(data.sys.sunrise * 1000).toLocaleTimeString('en-US')}/>
-            <BottomTile title={"Sunset"} info={new Date(data.sys.sunset * 1000).toLocaleTimeString('en-US')}/>
+            <BottomTile title={"Sunrise"} info={moment.utc(data.sys.sunrise, 'X').add(data.timezone,'seconds').format('h:mm A')}/>
+            <BottomTile title={"Sunset"} info={moment.utc(data.sys.sunset, 'X').add(data.timezone,'seconds').format('h:mm A')}/>
           </div>
         </>
-      : <LandingPage/>}
+      : <HomePage/>}
       </div>
       <div title="Go to site's Github" className='fixed bottom-1 right-2'>
         <a href="https://github.com/SyntaxWarrior30/Weather-App" target="_blank" rel="noopener noreferrer">
@@ -101,7 +102,7 @@ function App() {
           </button>
         </a>
       </div>  
-      <footer className='pt-16'>
+      <footer className='pt-7'>
         Created by Giridhar Nair
       </footer>
     </div>

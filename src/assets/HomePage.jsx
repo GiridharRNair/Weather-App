@@ -2,8 +2,9 @@ import React, { useEffect, useState, useCallback } from "react";
 import WeatherLatLon from "./WeatherLatLon";
 import BottomTile from "./BottomTile";
 import LocationClock from './LocationClock.jsx';
+import moment from 'moment';
 
-function LandingPage() {
+function HomePage() {
 
   const cx = import.meta.env.VITE_CX;
   const googleAPIKey = import.meta.env.VITE_API_KEY;
@@ -82,8 +83,8 @@ function LandingPage() {
           </div>
           <div className="flex flex-col pt-5 gap-4 sm:flex-row">
             <BottomTile title={"Air Pressure"} info={data.main.pressure.toFixed() + " hPa"}/>
-            <BottomTile title={"Sunrise"} info={new Date(data.sys.sunrise * 1000).toLocaleTimeString('en-US')}/>
-            <BottomTile title={"Sunset"} info={new Date(data.sys.sunset * 1000).toLocaleTimeString('en-US')}/>
+            <BottomTile title={"Sunrise"} info={moment.utc(data.sys.sunrise, 'X').add(data.timezone,'seconds').format('h:mm A')}/>
+            <BottomTile title={"Sunset"} info={moment.utc(data.sys.sunset, 'X').add(data.timezone,'seconds').format('h:mm A')}/>
           </div>
         </>
       : 
@@ -94,4 +95,4 @@ function LandingPage() {
   );
 }
 
-export default LandingPage;
+export default HomePage;
