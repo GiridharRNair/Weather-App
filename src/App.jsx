@@ -21,7 +21,6 @@ function App() {
         setPlaceHolder('Enter City Name');
         changeBackground();
         setData(weatherInfo);
-        console.log(weatherInfo)
       } else {
         setPlaceHolder('Invalid Location');
       }

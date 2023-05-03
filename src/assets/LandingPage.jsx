@@ -86,7 +86,10 @@ function LandingPage() {
             <BottomTile title={"Sunset"} info={new Date(data.sys.sunset * 1000).toLocaleTimeString('en-US')}/>
           </div>
         </>
-      : null}
+      : 
+      <div className="w-screen py-12 flex justify-center items-center text-white">
+        <h1>Loading...</h1>
+      </div>}
     </>
   );
 }
