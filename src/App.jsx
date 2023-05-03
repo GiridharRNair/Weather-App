@@ -11,6 +11,7 @@ function App() {
   const [placeHolder, setPlaceHolder] = useState('Enter City Name')
   const [sunrise, setSunrise] = useState("");
   const [sunset, setSunset] = useState("");
+  const [daysOfTheWeek, setDaysOfTheWeek] = useState(['']);
 
   const cx = import.meta.env.VITE_CX;
   const googleAPIKey = import.meta.env.VITE_API_KEY;
@@ -19,12 +20,11 @@ function App() {
   async function searchLocation (event) {
     if (event.key === 'Enter') {
       const weatherInfo = await new WeatherData(location).getData();
-      console.log(weatherInfo)
       if (weatherInfo !== 'Invalid Location') {
-        console.log(weatherInfo)
         setPlaceHolder('Enter City Name');
         changeBackground()
         setData(weatherInfo);
+        setDaysOfTheWeek(getNext7Days());
       } else {
         setPlaceHolder('Invalid Location');
       }
@@ -51,6 +51,20 @@ function App() {
         document.body.style.backgroundSize = "cover";
       })
   }
+
+  function getNext7Days() {
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const todayIndex = new Date().getDay();
+    const next7Days = [];
+  
+    for (let i = 0; i < 7; i++) {
+      const nextDayIndex = (todayIndex + i) % 7;
+      next7Days.push(days[nextDayIndex]);
+    }
+  
+    return next7Days;
+  }
+  
   
   useEffect(() => {
     if(data) {
@@ -73,7 +87,7 @@ function App() {
           onChange={event => setLocation(event.target.value)}
           onKeyDown={searchLocation} />
       </div>
-      <div className='flex pt-16 flex-col items-center'>
+      <div className='flex pt-10 flex-col items-center'>
       {data.name ? 
         <>
           <LocationClock lat={data.coord.lat} lon={data.coord.lon} /> 

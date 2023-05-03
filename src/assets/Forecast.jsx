@@ -1,8 +1,8 @@
 import React from 'react'
 
-function Forecast({ daysOfTheWeek, temp }) {
+function Forecast({ daysOfTheWeek, data }) {
   return (
-    <div className="pt-5 flex flex-row md:space-x-14 space-x-5 bg-opacity-70 rounded-xl w-40 h-40 justify-center">
+    <div className="bg-slate-600 py-3 flex flex-row md:space-x-14 space-x-5 bg-opacity-70 rounded-xl w-auto+ h-36 justify-center">
     <div class="text-center flex flex-col">
       Sun
       <div>
