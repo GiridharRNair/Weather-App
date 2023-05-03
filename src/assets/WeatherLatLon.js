@@ -1,7 +1,7 @@
 class WeatherLatLon {
     constructor(lat, lon) {
       this.openWeatherKey = import.meta.env.VITE_WEATHER_KEY;
-      this.weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${this.openWeatherKey}`;
+      this.weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=imperial&appid=${this.openWeatherKey}`;
     }
   
     getData() {

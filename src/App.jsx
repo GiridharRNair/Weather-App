@@ -1,20 +1,14 @@
-import { useEffect, useState } from 'react';
-import LocalClock from './assets/LocalClock.jsx';
+import { useState } from 'react';
+import LandingPage from './assets/LandingPage.jsx';
 import LocationClock from './assets/LocationClock.jsx';
 import BottomTile from './assets/BottomTile.jsx';
 import WeatherData from './assets/WeatherData.js'
-import WeatherLatLon from './assets/WeatherLatLon.js';
 
 function App() {
 
-  var count = 0;
   const [location, setLocation] = useState('');
   const [data, setData] = useState("");
   const [placeHolder, setPlaceHolder] = useState('Enter City Name')
-  const [sunrise, setSunrise] = useState("");
-  const [sunset, setSunset] = useState("");
-  const [latitude, setLatitude] = useState(null);
-  const [longitude, setLongitude] = useState(null);
 
   const cx = import.meta.env.VITE_CX;
   const googleAPIKey = import.meta.env.VITE_API_KEY;
@@ -22,20 +16,16 @@ function App() {
 
   async function searchLocation (event) {
     if (event.key === 'Enter') {
-      if ("geolocation" in navigator) {
-        console.log("Available");
-      } else {
-        console.log("Not Available");
-      }
       const weatherInfo = await new WeatherData(location).getData();
       if (weatherInfo !== 'Invalid Location') {
         setPlaceHolder('Enter City Name');
-        changeBackground()
+        changeBackground();
         setData(weatherInfo);
+        console.log(weatherInfo)
       } else {
         setPlaceHolder('Invalid Location');
       }
-      setLocation('')
+      setLocation('');
     }
   }
 
@@ -58,18 +48,6 @@ function App() {
         document.body.style.backgroundSize = "cover";
       })
   }
-
-
-  
-  
-  useEffect(() => {
-    if(data) {
-      const sunriseTime = new Date(data.sys.sunrise * 1000).toLocaleTimeString('en-US');
-      const sunsetTime = new Date(data.sys.sunset * 1000).toLocaleTimeString('en-US');
-      setSunrise(sunriseTime);
-      setSunset(sunsetTime);
-    }
-  }) 
   
   return (
     <div className='overflow-auto scrollbar-hide app flex flex-col py-5 h-screen items-center'>
@@ -83,8 +61,8 @@ function App() {
           onChange={event => setLocation(event.target.value)}
           onKeyDown={searchLocation} />
       </div>
-      <div className='flex pt-10 flex-col items-center'>
-      {data.name ? 
+      <div className='flex pt-8 flex-col items-center'>
+      {data ? 
         <>
           <LocationClock lat={data.coord.lat} lon={data.coord.lon} /> 
           <div className="text-7xl font-bold">
@@ -103,11 +81,11 @@ function App() {
           </div>
           <div className="flex flex-col pt-5 gap-4 sm:flex-row">
             <BottomTile title={"Air Pressure"} info={data.main.pressure.toFixed() + " hPa"}/>
-            <BottomTile title={"Sunrise"} info={sunrise}/>
-            <BottomTile title={"Sunset"} info={sunset}/>
+            <BottomTile title={"Sunrise"} info={new Date(data.sys.sunrise * 1000).toLocaleTimeString('en-US')}/>
+            <BottomTile title={"Sunset"} info={new Date(data.sys.sunset * 1000).toLocaleTimeString('en-US')}/>
           </div>
         </>
-      : <LocalClock/>}
+      : <LandingPage/>}
       </div>
       <div title="Go to site's Github" className='fixed bottom-1 right-2'>
         <a href="https://github.com/SyntaxWarrior30/Weather-App" target="_blank" rel="noopener noreferrer">
