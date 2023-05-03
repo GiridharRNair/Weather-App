@@ -7,9 +7,9 @@ This is a simple responsive weather application that provides weather informatio
 
 ## Usage
 
-The first page of the application displays weather information for the user's location. If location tracking is turned off, the default location is set to London. The user can search for weather information for any other location by entering the name of the city or the ZIP code in the search bar.
+The first page of the application displays weather information for the user's location. If location tracking is turned off, the default location is set to London. The user can search for weather information for any other location by entering the name of the city.
 
-## Installation
+## Run Locally
 
 Clone the project
 ```bash
