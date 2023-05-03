@@ -2,6 +2,7 @@
 
 <img width='800' src="./public/UserInterface.png"/>
 
+Active Link: https://syntaxwarrior30.github.io/Weather-App/
 
 This is a simple responsive weather application that provides weather information for a user-specified location. The application features a dynamic background that changes based on the user's location.
 
