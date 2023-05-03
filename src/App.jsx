@@ -3,15 +3,18 @@ import LocalClock from './assets/LocalClock.jsx';
 import LocationClock from './assets/LocationClock.jsx';
 import BottomTile from './assets/BottomTile.jsx';
 import WeatherData from './assets/WeatherData.js'
+import WeatherLatLon from './assets/WeatherLatLon.js';
 
 function App() {
 
+  var count = 0;
   const [location, setLocation] = useState('');
-  const [data, setData] = useState('');
+  const [data, setData] = useState("");
   const [placeHolder, setPlaceHolder] = useState('Enter City Name')
   const [sunrise, setSunrise] = useState("");
   const [sunset, setSunset] = useState("");
-  const [daysOfTheWeek, setDaysOfTheWeek] = useState(['']);
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
 
   const cx = import.meta.env.VITE_CX;
   const googleAPIKey = import.meta.env.VITE_API_KEY;
@@ -19,12 +22,16 @@ function App() {
 
   async function searchLocation (event) {
     if (event.key === 'Enter') {
+      if ("geolocation" in navigator) {
+        console.log("Available");
+      } else {
+        console.log("Not Available");
+      }
       const weatherInfo = await new WeatherData(location).getData();
       if (weatherInfo !== 'Invalid Location') {
         setPlaceHolder('Enter City Name');
         changeBackground()
         setData(weatherInfo);
-        setDaysOfTheWeek(getNext7Days());
       } else {
         setPlaceHolder('Invalid Location');
       }
@@ -52,18 +59,7 @@ function App() {
       })
   }
 
-  function getNext7Days() {
-    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    const todayIndex = new Date().getDay();
-    const next7Days = [];
-  
-    for (let i = 0; i < 7; i++) {
-      const nextDayIndex = (todayIndex + i) % 7;
-      next7Days.push(days[nextDayIndex]);
-    }
-  
-    return next7Days;
-  }
+
   
   
   useEffect(() => {
