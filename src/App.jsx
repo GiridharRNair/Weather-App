@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import LocalClock from './assets/LocalClock.jsx';
 import LocationClock from './assets/LocationClock.jsx';
 import BottomTile from './assets/BottomTile.jsx';
+import WeatherData from './assets/WeatherData.js'
 
 function App() {
 
@@ -13,44 +14,22 @@ function App() {
 
   const cx = import.meta.env.VITE_CX;
   const googleAPIKey = import.meta.env.VITE_API_KEY;
-  const openWeatherKey = import.meta.env.VITE_WEATHER_KEY;
-  const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=${openWeatherKey}`;
   const backgroundUrl = `https://www.googleapis.com/customsearch/v1?key=${googleAPIKey}&cx=${cx}&q=${location}+skyline+1080p&searchType=image`;
 
-  function searchLocation (event) {
+  async function searchLocation (event) {
     if (event.key === 'Enter') {
-      try {
-        fetch(weatherUrl)
-          .then(response => {
-            response.json().then((data) => {
-              if (data.name != undefined) {
-                changeBackground();
-                setPlaceHolder('Enter City Name');
-                setData(data);
-                getSunriseSunsetTime();
-              } else {
-                setPlaceHolder('Invalid Location');
-              }
-            });
-          })
-        setLocation('');
+      const weatherInfo = await new WeatherData(location).getData();
+      console.log(weatherInfo)
+      if (weatherInfo !== 'Invalid Location') {
+        console.log(weatherInfo)
+        setPlaceHolder('Enter City Name');
+        changeBackground()
+        setData(weatherInfo);
+      } else {
+        setPlaceHolder('Invalid Location');
       }
-      catch (error) {
-        console.log(error);
-      }
+      setLocation('')
     }
-  }
-  
-  function getSunriseSunsetTime () {
-    fetch(weatherUrl)
-    .then((response) => response.json())
-    .then((data) => {
-      const sunriseTime = new Date(data.sys.sunrise * 1000).toLocaleTimeString('en-US');
-      const sunsetTime = new Date(data.sys.sunset * 1000).toLocaleTimeString('en-US');
-      setSunrise(sunriseTime);
-      setSunset(sunsetTime);
-    })
-    .catch((error) => console.log(error));
   }
 
   function changeBackground() {
@@ -72,6 +51,15 @@ function App() {
         document.body.style.backgroundSize = "cover";
       })
   }
+  
+  useEffect(() => {
+    if(data) {
+      const sunriseTime = new Date(data.sys.sunrise * 1000).toLocaleTimeString('en-US');
+      const sunsetTime = new Date(data.sys.sunset * 1000).toLocaleTimeString('en-US');
+      setSunrise(sunriseTime);
+      setSunset(sunsetTime);
+    }
+  }) 
   
   return (
     <div className='overflow-auto scrollbar-hide app flex flex-col py-5 h-screen items-center'>
